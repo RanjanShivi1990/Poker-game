@@ -45,7 +45,7 @@ test('test_01, Main Bet Options: Validate bet placement on PlayerA and locking P
     );
     await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player A',
+      'A',
       'High card'
     );
   });
@@ -84,11 +84,11 @@ test('test_02, Main Bet Options: Validate bet placement on PlayerB and locking P
       '100',
       'Player B'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
+      'B',
       'High card'
-    );*/
+    );
   }); 
 
 test('test_03 32, Side bet options: Side Bet for player A (One Pair) and Invalid Bet on Completed Round', async ({
@@ -126,11 +126,11 @@ test('test_03 32, Side bet options: Side Bet for player A (One Pair) and Invalid
       '100',
       'Player A One Pair'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player A',
+      'A',
       'Pair'
-    );*/
+    );
   }); 
 
 test('test_04, Side bet options: Side Bet for player B (One Pair)', async ({
@@ -164,11 +164,11 @@ test('test_04, Side bet options: Side Bet for player B (One Pair)', async ({
       '100',
       'Player B One Pair'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
       'Player B',
       'Pair'
-    );*/
+    );
   }); 
 test('test_05, Side bet options: Side Bet for player A (Two Pair)', async ({
     page,
@@ -201,11 +201,11 @@ test('test_05, Side bet options: Side Bet for player A (Two Pair)', async ({
       '100',
       'Player A Two Pair'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player A',
+      'A',
       'Two Pair'
-    );*/
+    );
   });
 
 test('test_06, Side bet options: Side Bet for player B (Two Pair)', async ({
@@ -239,11 +239,11 @@ test('test_06, Side bet options: Side Bet for player B (Two Pair)', async ({
       '100',
       'Player B Two Pair'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
+      'B',
       'Two Pair'
-    );*/
+    );
   });
 
 test('test_07, Side bet options: Side Bet for player A (Trio)', async ({
@@ -277,11 +277,11 @@ test('test_07, Side bet options: Side Bet for player A (Trio)', async ({
       '100',
       'Player A Three Of A Kind'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
+      'A',
       'Three of a Kind'
-    );*/
+    );
   });
 
 test('test_08, Side bet options: Side Bet for player B (Trio)', async ({
@@ -315,11 +315,11 @@ test('test_08, Side bet options: Side Bet for player B (Trio)', async ({
       '100',
       'Player B Three Of A Kind'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
+      'B',
       'Three of a Kind'
-    );*/
+    );
   });
 
 test('test_09, Side bet options: Side Bet for player A (Straight)', async ({
@@ -429,11 +429,11 @@ test('test_11, Side bet options: Side Bet for player A (Flush)', async ({
       '100',
       'Player A Flush'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
-      'Three of a Kind'
-    );*/
+      'A',
+      'Flush'
+    );
   });
 
 test('test_12, Side bet options: Side Bet for player B (Flush)', async ({
@@ -467,11 +467,11 @@ test('test_12, Side bet options: Side Bet for player B (Flush)', async ({
       '100',
       'Player B Flush'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
-      'Three of a Kind'
-    );*/
+      'B',
+      'Flush'
+    );
   });
 
   
@@ -506,11 +506,11 @@ test('test_13, Side bet options: Side Bet for player A (Full House)', async ({
       '100',
       'Player A Full House'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
-      'Three of a Kind'
-    );*/
+      'A',
+      'Full House'
+    );
   });
 
 test('test_14, Side bet options: Side Bet for player B (Full House)', async ({
@@ -544,11 +544,11 @@ test('test_14, Side bet options: Side Bet for player B (Full House)', async ({
       '100',
       'Player B Full House'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
-      'Three of a Kind'
-    );*/
+      'B',
+      'Full House'
+    );
   });
 
 test('test_15, Side bet options: Side Bet for player A(Four of a Kind)', async ({
@@ -582,11 +582,11 @@ test('test_15, Side bet options: Side Bet for player A(Four of a Kind)', async (
       '100',
       'Player A Four Of A Kind'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player A',
+      'A',
       'Four of a Kind'
-    );*/
+    );
   });
 
   test('test_16, Side bet options: Side Bet for player B(Four of a Kind)', async ({
@@ -620,11 +620,11 @@ test('test_15, Side bet options: Side Bet for player A(Four of a Kind)', async (
       '100',
       'Player B Four Of A Kind'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
+      'B',
       'Four of a Kind'
-    );*/
+    );
   });
 
 test('test_17, Side bet options: Side Bet for player A(Straight Flush)', async ({
@@ -640,8 +640,8 @@ test('test_17, Side bet options: Side Bet for player A(Straight Flush)', async (
     await pokerGamePage.clickNewGame(dealerDevPage);
     await page.waitForTimeout(5000);
     await pokerGamePage.clickOnSpecificMarket(
-        'Player A Straight FLush'
-      );
+      'Player A Straight Flush'
+    );
     await pokerGamePage.validateBetAmount(pokerGamePage, '100');
     await pokerGamePage.waitForTimeout(
       dealerDevPage,
@@ -658,11 +658,11 @@ test('test_17, Side bet options: Side Bet for player A(Straight Flush)', async (
       '100',
       'Player A Straight FLush'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player A',
+      'A',
       'Straight Flush'
-    );*/
+    );
   });
 
 test('test_18 23, Side bet options: Side Bet for player B(Straight Flush) and Placing bet functionality', async ({
@@ -696,11 +696,11 @@ test('test_18 23, Side bet options: Side Bet for player B(Straight Flush) and Pl
       '100',
       'Player B Straight FLush'
     );
-    /*await pokerGamePage.validatePlayerAndWinningPattern(
+    await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
       'Player B',
-      'Three of a Kind'
-    );*/
+      'Straight Flush'
+    );
   });
 
 test('test_22, Validate Select the Chip functionality', async ({ page , context, }) => {
@@ -843,5 +843,25 @@ test('test_26, Maximum Bet Limit Exceeded', async ({
     await pokerGamePage.clickNewGame(dealerDevPage);
     await pokerGamePage.validateMaximumAllowedBet();
   });
-  
-  
+
+test('test_26, Auto functionality: Validate Number of Rounds field with valid inputs and autoBet functionality', async ({
+    page,
+    context,
+    }) => {
+    pokerGamePage = new PokerGamePage(page);
+    const dealerDevPagePromise = await context.newPage();
+    const dealerDevPage = await dealerDevPagePromise;
+    await pokerGamePage.navigateToDelearDevAndLogin(dealerDevPage);
+    await pokerGamePage.clickOnDealerPoker2020Game(dealerDevPage);
+    await dealerDevPage.reload();
+    await pokerGamePage.clickNewGame(dealerDevPage);
+    await page.waitForTimeout(5000);
+    await pokerGamePage.clickOnSpecificMarket(
+      'Player A'
+    );
+    await pokerGamePage.clickOnAutoBetIcon();
+    await pokerGamePage.clickOnNumberOfRounds(5);
+    await pokerGamePage.validateAutoBetFunctionality();
+    await pokerGamePage.validateAutoPlacingBet(dealerDevPage);
+    
+    });

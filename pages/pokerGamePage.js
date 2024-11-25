@@ -39,25 +39,45 @@ exports.PokerGamePage = class PokerGamePage {
     this.twoPairBMarket = this.page.locator('#Two-Pair_B div').nth(2);
     this.trioAMarket = this.page.locator('#Trio_A div').nth(2);
     this.trioBMarket = this.page.locator('#Trio_B div').nth(2);
-    this.straightAMarket = this.page.locator('#Straight_A div').nth(2);
-    this.straightBMarket = this.page.locator('#Straight_B div').nth(2);
-    this.flushAMarket = this.page.locator('#Flush_A div').nth(2);
-    this.flushBMarket = this.page.locator('#Flush_B div').nth(2);
+    this.straightAMarket = this.page.locator("#Straight_A div").nth(2);
+    this.straightBMarket = this.page.locator("#Straight_B div").nth(2);
+    this.flushAMarket = this.page.locator("#Flush_A div").nth(2);
+    this.flushBMarket = this.page.locator("#Flush_B div").nth(2);
     this.fullHouseAMarket= this.page.locator('#Full-House_A div').nth(2);
     this.fullHouseBMarket= this.page.locator('#Full-House_B div').nth(2);
     this.fourOfAKindAMarket= this.page.locator('[id="\\ Four-of-a-Kind_A"] div').nth(2);
     this.fourOfAKindBMarket= this.page.locator("//div[@id='Four-of-a-Kind_B']//div[contains(@class,'relative w-10 h-10')]");
     this.straightFlushAMarket= this.page.locator("#Straight-Flush_A div").nth(2);
     this.straightFlushBMarket= this.page.locator("//div[@id='Straight-Flush_B']//span[contains(@class,'absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white')]").nth(2);
-    this.autoBetButton = this.page.locator(".w-2 h-2");
+    this.autoBetButton = this.page.locator("(//*[name()='svg'][@class='w-2 h-2'])[1]");
+
+    this.startAutoBetButton = this.page.locator('text=Start');
+    this.stopAutoBetButton = this.page.locator('text=Stop');
+
+    this.autoBetStartedMessage =this.
+      page
+        .locator('div')
+        .filter({ hasText: 'Auto Play Started' })
+        .nth(1);
+
+    this.autoBetStoppedMessage =this.
+        page
+          .locator('div')
+          .filter({ hasText: 'Auto Play Stopped' })
+          .nth(1);
+
     this.playerAndWinningPattern = (page, player, pattern) =>
         page.locator(
            `//span[text()='Player ${player}']/following-sibling::span[contains(text(),'${pattern}')]`);
-
+          
+    this.winnerTextAndWinningPattern = (page, player) =>
+        page.locator(
+          `//span[text()='Player ${player}']/following-sibling::span[text()='WINNER']`
+            );
+  
     this.pleaseWaitForNextRoundMessage =
            this.page.getByText('Please wait for next round');
     
-
     this.doublButton = this.page.locator("(//span[normalize-space()='double'])[1]");
     this.undoButton = this.page.locator("(//span[normalize-space()='undo'])[1]");
     this.repeatButton = this.page.locator("(//span[normalize-space()='repeat'])[1]");
@@ -494,37 +514,12 @@ async validatePlayerAndWinningPattern(page, player, pattern) {
         await this.playerAndWinningPattern(page, player, pattern),
         `Validate ${player} is win with pattern ${pattern} in dealer dev page `
       );
+      await this.assertions.assertElementVisible(
+        await this.winnerTextAndWinningPattern(page, player),
+        `Validate ${player} winner Text in dealer dev page`
+      );
     }
   }
-async attemptToPlaceBet() {
-  const buttons = this.page.locator(this.player10Back);
-
-  for (let i = 0; i < await buttons.count(); i++) {
-    try {
-      await buttons.nth(i).click();
-      console.log(`Clicked on market button ${i + 1}`);
-    } catch (error) {
-      console.log(`Market button ${i + 1} is unclickable or disabled.`);
-    }
-  }
-}
-async verifyMarketButtonsDisabled() {
-    const buttons = this.page.locator(this.player10Back);
-    const buttonCount = await buttons.count();
-
-    for (let i = 0; i < buttonCount; i++) {
-      const isEnabled = await buttons.nth(i).isEnabled();
-      expect(isEnabled).toBe(false, `Market button ${i + 1} should be disabled.`);
-    }
-  }
-  
-async verifyMarketReopensAfterTie(dealerDevPage) {
-  // Wait for the market to become clickable again after the tie
-  const marketButton = await dealerDevPage.getByText('Bet Time'); 
-  await marketButton.waitFor({ state: 'attached', timeout: 10000 });
-  await expect(marketButton).toBeEnabled(); 
-
-}
   async validateTotalBetAmountForMultipleMarkets(page, betAmount, markets) {
     const marketMultipliers = {
       'Market For Player A': 1.98,
@@ -580,4 +575,69 @@ async verifyMarketReopensAfterTie(dealerDevPage) {
       )}`
     );
   };
+  async clickOnAutoBetIcon() {
+    await expect(this.autoBetButton).toBeVisible();
+    await executeStep(this.autoBetButton, 'click', 'Click undo button');
+  }
+  async clickOnNumberOfRounds(rounds) {
+    await executeStep(this.numberOfRounds, 'click',  `Click on Number of rounds ${rounds}`);
+  }
+  async clickOnNumberOfRounds(rounds) {
+    const numberOfRounds = this.page.locator(`//span[text()='${rounds}']/following-sibling::span[text()='ROUNDS']`);
+    await executeStep(
+      numberOfRounds,
+      'click',
+      `Click on Number Of Rounds ${rounds}`,
+      []
+    );
+  }
+  async validateAutoBetFunctionality(){
+    await expect(this.startAutoBetButton).toBeVisible();
+    await executeStep(this.startAutoBetButton, 'click', 'Click on Start button')
+    await this.assertions.assertElementVisible(
+      await this.autoBetStartedMessage,
+      'Auto Play Started should be visible'
+    );
+  }
+    async validateAutoPlacingBet(dealerDevPage){
+    await this.selectingCardsInLoop(
+      dealerDevPage,
+      testData.poker2020.marketOptions.PlayerA
+    );
+    await dealerDevPage.clickNewGame();
+    await expect(await this.playerAMarketChipContainer('100')).toBeVisible();
+    await this.validateBetAmount(pokerGamePage, '100');
+    await this.selectingCardsInLoop(
+      dealerDevPage,
+      testData.poker2020.marketOptions.PlayerA
+    );
+    await dealerDevPage.clickNewGame();
+    await expect(await this.playerAMarketChipContainer('100')).toBeVisible();
+    await this.validateBetAmount(pokerGamePage, '100');
+    await this.selectingCardsInLoop(
+      dealerDevPage,
+      testData.poker2020.marketOptions.PlayerA
+    );
+    await dealerDevPage.clickNewGame();
+    await expect(await this.playerAMarketChipContainer('100')).toBeVisible();
+    await this.selectingCardsInLoop(
+      dealerDevPage,
+      testData.poker2020.marketOptions.PlayerA
+    );
+    await dealerDevPage.clickNewGame();
+    await expect(await this.playerAMarketChipContainer('100')).toBeVisible();
+    await this.selectingCardsInLoop(
+      dealerDevPage,
+      testData.poker2020.marketOptions.PlayerA
+    );
+    await expect(this.stopAutoBetButton).toBeVisible();
+    await executeStep(this.stopAutoBetButton, 'click', 'Click on Start button')
+    await this.assertions.assertElementVisible(
+      await this.autoBetStoppedMessage,
+      'Auto Play Stopped should be visible'
+    );
+    
+  }
+}
+
 }
