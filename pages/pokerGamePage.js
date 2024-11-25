@@ -33,22 +33,22 @@ exports.PokerGamePage = class PokerGamePage {
     )
     this.playerAMarket = this.page.locator("#Player-A");
     this.playerBMarket = this.page.locator("#Player-B");
-    this.onePairAMarket = this.page.locator("#\\ One-Pair_A");
-    this.onePairBMarket = this.page.locator("#\\ One-Pair_B");
-    this.twoPairAMarket = this.page.locator("#\\ Two-Pair_A");
-    this.twoPairBMarket = this.page.locator("#\\ Two-Pair_B");
-    this.trioAMarket = this.page.locator("#\\ Trio_A");
-    this.trioBMarket = this.page.locator("#\\ Trio_B");
-    this.straightAMarket = this.page.locator("#\\ Straight_A");
-    this.straightBMarket = this.page.locator("#\\ Straight_B");
-    this.flushAMarket = this.page.locator("#\\ Flush_A");
-    this.flushBMarket = this.page.locator("#\\ Flush_B");
-    this.fullHouseAMarket= this.page.locator("#\\ Full-House_A");
-    this.fullHouseBMarket= this.page.locator("#\\ Full-House_B");
-    this.fourOfAKindAMarket= this.page.locator("#\\ Four-of-a-Kind_A");
-    this.fourOfAKindBMarket= this.page.locator("#\\ Four-of-a-Kind_B");
-    this.straightFlushAMarket= this.page.locator("#\\ Straight-Flush_A");
-    this.straightFlushBMarket= this.page.locator("#\\ Straight-Flush_B");
+    this.onePairAMarket = this.page.locator('#One-Pair_A div').nth(2);
+    this.onePairBMarket = this.page.locator('#One-Pair_B div').nth(2);
+    this.twoPairAMarket = this.page.locator('#Two-Pair_A div').nth(2);
+    this.twoPairBMarket = this.page.locator('#Two-Pair_B div').nth(2);
+    this.trioAMarket = this.page.locator('#Trio_A div').nth(2);
+    this.trioBMarket = this.page.locator('#Trio_B div').nth(2);
+    this.straightAMarket = this.page.locator('#Straight_A div').nth(2);
+    this.straightBMarket = this.page.locator('#Straight_B div').nth(2);
+    this.flushAMarket = this.page.locator('#Flush_A div').nth(2);
+    this.flushBMarket = this.page.locator('#Flush_B div').nth(2);
+    this.fullHouseAMarket= this.page.locator('#Full-House_A div').nth(2);
+    this.fullHouseBMarket= this.page.locator('#Full-House_B div').nth(2);
+    this.fourOfAKindAMarket= this.page.locator('[id="\\ Four-of-a-Kind_A"] div').nth(2);
+    this.fourOfAKindBMarket= this.page.locator("//div[@id='Four-of-a-Kind_B']//div[contains(@class,'relative w-10 h-10')]");
+    this.straightFlushAMarket= this.page.locator("#Straight-Flush_A div").nth(2);
+    this.straightFlushBMarket= this.page.locator("//div[@id='Straight-Flush_B']//span[contains(@class,'absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white')]").nth(2);
     this.autoBetButton = this.page.locator(".w-2 h-2");
     this.playerAndWinningPattern = (page, player, pattern) =>
         page.locator(
@@ -269,7 +269,7 @@ exports.PokerGamePage = class PokerGamePage {
         await executeStep(this.twoPairBMarket,'click','Clicking on Player B Two Pair');
         break;
       case 'Player A Three Of A Kind':
-        await executeStep(this.twoPairAMarket,'click','Clicking on Player A Three Of A Kind');
+        await executeStep(this.trioAMarket,'click','Clicking on Player A Three Of A Kind');
         break;
       case 'Player B Three Of A Kind':
         await executeStep(this.trioBMarket,'click','Clicking on Player B Three Of A Kind');
@@ -467,7 +467,7 @@ async validateMaximumAllowedBet() {
     await this.marketExceedsLimitMesg,
     'Bet amount exceeds the maximum bet limit should be visible'
   );
-  await this.bettingOnSpecificPlayerInLoop('Player A Four Of A Kind', 4);
+  await this.bettingOnSpecificPlayerInLoop('Player B Four Of A Kind', 4);
   await this.assertions.assertElementVisible(
     await this.marketProfitLimitMesg,
     'Max Profit Limit is 600000 should be visible'

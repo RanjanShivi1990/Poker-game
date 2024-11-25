@@ -584,8 +584,8 @@ test('test_15, Side bet options: Side Bet for player A(Four of a Kind)', async (
     );
     /*await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
-      'Three of a Kind'
+      'Player A',
+      'Four of a Kind'
     );*/
   });
 
@@ -623,7 +623,7 @@ test('test_15, Side bet options: Side Bet for player A(Four of a Kind)', async (
     /*await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
       'Player B',
-      'Three of a Kind'
+      'Four of a Kind'
     );*/
   });
 
@@ -660,8 +660,8 @@ test('test_17, Side bet options: Side Bet for player A(Straight Flush)', async (
     );
     /*await pokerGamePage.validatePlayerAndWinningPattern(
       dealerDevPage,
-      'Player B',
-      'Three of a Kind'
+      'Player A',
+      'Straight Flush'
     );*/
   });
 
