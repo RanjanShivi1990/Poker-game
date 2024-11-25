@@ -1,0 +1,24 @@
+image: mcr.microsoft.com/playwright:v1.47.0-jammy
+
+definitions:
+  steps:
+    - step: &run_test
+        name: 'Setup Environment and Run Tests'
+        script:
+          - npm install
+          - npx playwright install
+          - npm i -D allure-playwright
+          - npx playwright test --reporter=line,allure-playwright
+          - apt-get update
+          - apt-get install openjdk-8-jdk -y
+          - java -version
+          - npx allure generate ./allure-results -o ./allure-report
+          - npx allure generate --single-file allure-results --clean
+        artifacts:
+          - allure-results/**
+          - allure-report/**
+          - test-results/**
+pipelines:
+  custom:
+    runtest:
+      - step: *run_test
