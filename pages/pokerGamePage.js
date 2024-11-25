@@ -524,7 +524,7 @@ async verifyMarketReopensAfterTie(dealerDevPage) {
   await marketButton.waitFor({ state: 'attached', timeout: 10000 });
   await expect(marketButton).toBeEnabled(); 
 
-
+}
   async validateTotalBetAmountForMultipleMarkets(page, betAmount, markets) {
     const marketMultipliers = {
       'Market For Player A': 1.98,
@@ -579,6 +579,5 @@ async verifyMarketReopensAfterTie(dealerDevPage) {
         2
       )}`
     );
-  }
-}
+  };
 }
